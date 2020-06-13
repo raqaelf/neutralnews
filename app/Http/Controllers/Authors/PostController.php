@@ -43,6 +43,7 @@ class PostController extends Controller
         }
         $categories = Category::select('id','name')->get();
         return view('Authors.post.index', compact('categories'));
+        // return view('Authors.post.index');
         // return dd($data);
     }
 
@@ -58,10 +59,6 @@ class PostController extends Controller
             } else {
                 return response()->json(['message' => 'Image must be not empty!'], 500);
             }
-        }
-        $duplicate = Post::where('slug', Str::slug($request->input('title')))->first();
-        if ($duplicate) {
-            return response()->json(['message' => 'Title Already Exsist'], 500);
         }
         $insert = Post::updateOrCreate(['id' => $request->input('id')],
         [

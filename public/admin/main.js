@@ -1,3 +1,4 @@
+
 var content = $('meta[name="content"]').attr('content');
 var token = $('meta[name="csrf-token"]').attr('content');
 var url = $('meta[name="parameter"]').attr('content');
@@ -83,7 +84,7 @@ $('body').on('click', '.editRole', function () {
             }
             $('textarea[name="' + i + '"]').val(v);
             $('#'+i).attr('checked', true);
-            if(i == 'content'){
+            if(i == 'body'){
                 tinyMCE.activeEditor.setContent(v);
             }
         });
