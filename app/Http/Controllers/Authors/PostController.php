@@ -29,7 +29,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Post::with('Category')->latest()->get();
+            $data = Post::with('Category')->where('author_id',auth()->user()->id)->latest()->get();
             return Datatables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function($row){
