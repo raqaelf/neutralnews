@@ -28,19 +28,36 @@ class PostController extends Controller
     */
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            $data = Post::with('Category')->where('author_id',auth()->user()->id)->latest()->get();
-            return Datatables::of($data)
-            ->addIndexColumn()
-            ->addColumn('action', function($row){
-                $btn = '<a href="javascript:void(0)" data-id="'.$row->id.'" class="btn btn-xs btn-white btn-uppercase editRole"><i class="icon ion-md-create mr-1"></i>Edit</a>';
-                $btn = $btn.' <a href="javascript:void(0)"  data-id="'.$row->id.'" class="btn btn-xs text-danger btn-uppercase deleteRole">Delete</a>';
+        if (auth()->user()->role == "admin"){
+            if ($request->ajax()) {
+                $data = Post::with('Category')->latest()->get();
+                return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $btn = '<a href="javascript:void(0)" data-id="'.$row->id.'" class="btn btn-xs btn-white btn-uppercase editRole"><i class="icon ion-md-eye mr-1"></i>View</a>';
+                    $btn = $btn.' <a href="javascript:void(0)"  data-id="'.$row->id.'" class="btn btn-xs text-danger btn-uppercase deleteRole">Delete</a>';
 
-                return $btn;
-            })
-            ->rawColumns(['action'])
-            ->make(true);
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+            }
+        } else {
+            if ($request->ajax()) {
+                $data = Post::with('Category')->where('author_id',auth()->user()->id)->latest()->get();
+                return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $btn = '<a href="javascript:void(0)" data-id="'.$row->id.'" class="btn btn-xs btn-white btn-uppercase editRole"><i class="icon ion-md-create mr-1"></i>Edit</a>';
+                    $btn = $btn.' <a href="javascript:void(0)"  data-id="'.$row->id.'" class="btn btn-xs text-danger btn-uppercase deleteRole">Delete</a>';
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+            }
         }
+
         $categories = Category::select('id','name')->get();
         return view('Authors.post.index', compact('categories'));
         // return view('Authors.post.index');

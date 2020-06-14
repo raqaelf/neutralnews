@@ -23,7 +23,10 @@
                     </div>
                     <div class="form-group">
                         <label for="img" class="tx-10 tx-uppercase tx-medium tx-spacing-1 mg-b-5 tx-color-03">Post Image</label>
-                        <input type="file" name="img" class="form-control">
+                        <br>
+                        <label for="profile_image"></label>
+                        <img id="preview_img" src="https://lh3.googleusercontent.com/proxy/BLOE7BuXhfFokxX0TML64dYh1iZcnkZAvYEoUoIvvt9E6d2RALYSy2FkacW5cWjeBa1OekT_0X_BBT6jTVY_WRnp39x_GQUw4X12LYE_q8BmGCCytm3h" name="image" class="" width="200" height="150"/>
+                        <input type="file" onchange="loadPreview(this);" name="img" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="category" class="tx-10 tx-uppercase tx-medium tx-spacing-1 mg-b-5 tx-color-03">Post Category</label>
@@ -41,9 +44,27 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="file-submit" value="create">Save changes</button>
+                    <button type="submit" class="btn btn-primary" id="file-submit" value="create">{{ auth()->user()->role === "admin" ? "Publish" : "Save Changes" }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+<script>
+    function loadPreview(input, id) {
+        id = id || '#preview_img';
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $(id)
+                .attr('src', e.target.result)
+                .width(200)
+                .height(150);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

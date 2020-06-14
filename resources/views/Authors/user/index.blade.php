@@ -1,13 +1,9 @@
 @extends('Authors.layouts.app')
-@section('title', 'Post Management')
+@section('title', 'User Management')
 
 @section('meta')
-<meta name="content" content="post">
-<meta name="parameter" content="{{ route('post.index') }}">
-@endsection
-
-@section('style')
-<script src="{{ asset('admin/assets/js/tinymce/js/tinymce/tinymce.min.js') }}"></script>
+<meta name="content" content="user">
+<meta name="parameter" content="{{ route('user.index') }}">
 @endsection
 
 @section('content')
@@ -27,11 +23,10 @@
         <table id="datatable" class="table table-dashboard mg-b-0 w-100">
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>Title</th>
-                    <th>Category</th>
-                    <th>Slug</th>
-                    <th>Status</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
                     <th width="100px">Action</th>
                 </tr>
             </thead>
@@ -39,7 +34,7 @@
     </div>
 </div>
 
-@include('Authors.post._modal')
+@include('Authors.user._modal')
 
 @endsection
 

@@ -20,6 +20,12 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/panel', 'Authors\HomeController@index')->name('dashboard');
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+Route::get('/panel/user', 'Authors\UserController@index')->name('user.index');
+Route::post('/panel/user', 'Authors\UserController@store')->name('user.store');
+Route::get('/panel/user/{id}/edit', 'Authors\UserController@edit')->name('user.edit');
+Route::delete('/user/post/{id}', 'Authors\UserController@destroy')->name('user.delete');
 
 Route::get('/panel/post', 'Authors\PostController@index')->name('post.index');
 Route::post('/panel/post', 'Authors\PostController@store')->name('post.store');

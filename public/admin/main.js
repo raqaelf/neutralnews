@@ -23,6 +23,7 @@ const Toast = Swal.mixin({
 
 $('#store-modal').click(function () {
     $('#dataForm').trigger("reset");
+    $('img[name="image"]').attr('src', 'https://lh3.googleusercontent.com/proxy/BLOE7BuXhfFokxX0TML64dYh1iZcnkZAvYEoUoIvvt9E6d2RALYSy2FkacW5cWjeBa1OekT_0X_BBT6jTVY_WRnp39x_GQUw4X12LYE_q8BmGCCytm3h');
     $('input:checkbox').removeAttr('checked');
     $('#formModal').modal('show');
 });
@@ -76,12 +77,12 @@ $('body').on('click', '.editRole', function () {
     var id = $(this).data('id');
     $.get(url+'/' + id +'/edit', function (data) {
         $('#dataForm').trigger("reset");
-        $('input:checkbox').removeAttr('checked');
         $.each(data, (i, v) => {
             $('select[name="' + i + '"]').val(v).trigger('change.select2');
             if (i != "image" && i != 'img') {
                 $('input[name="' + i + '"]').val(v);
             }
+            $('img[name="' + i + '"]').attr('src', '/uploads/articles/'+v);
             $('textarea[name="' + i + '"]').val(v);
             $('#'+i).attr('checked', true);
             if(i == 'body'){
