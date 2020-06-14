@@ -13,4 +13,8 @@ class Post extends Model
     {
         return $this->hasOne('App\Category','id','category_id');
     }
+    public function Author()
+    {
+        return $this->hasOne('App\User','id','author_id');
+    }
 }

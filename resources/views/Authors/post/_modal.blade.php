@@ -17,6 +17,21 @@
             <form id="dataForm" class="form-horizontal" enctype="multipart/form-data">
                 <div class="modal-body">
                     <input type="hidden" name="id" id="id">
+                    @if(auth()->user()->role == 'admin')
+                    <h1 class="author" name="author_id"></h1>
+                    <div class="form-group">
+
+                        <label for="active" class="tx-10 tx-uppercase tx-medium tx-spacing-1 mg-b-5 tx-color-03">Publish</label>
+
+                        <select name="active" id="active" class="form-control">
+                            <option value="1">Publish</option>
+                            <option value="0">Unpublish</option>
+                        </select>
+                    </div>
+                    @else
+                    <input type="hidden" name="active" id="active" value="0">
+                    @endif
+
                     <div class="form-group">
                         <label for="title" class="tx-10 tx-uppercase tx-medium tx-spacing-1 mg-b-5 tx-color-03">Post Title</label>
                         <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title" value="" maxlength="50" required="">
@@ -44,7 +59,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="file-submit" value="create">{{ auth()->user()->role === "admin" ? "Publish" : "Save Changes" }}</button>
+                    <button type="submit" class="btn btn-primary" id="file-submit" value="create">Save Changes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </form>
