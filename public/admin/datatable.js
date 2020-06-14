@@ -1,4 +1,13 @@
 switch (content) {
+    case 'user' :
+    column = [
+        {data: 'id', name: 'id'},
+        {data: 'name', name: 'name'},
+        {data: 'email', name: 'email'},
+        {data: 'role', name: 'role'},
+        {data: 'action', name: 'action', orderable: false, searchable: false}
+    ]
+    break;
     case 'category' :
     column = [
         {data: 'id', name: 'id'},
@@ -12,14 +21,18 @@ switch (content) {
         {data: 'title', name: 'title'},
         {data: 'category.name', name: 'category'},
         {
+            data: 'slug',
+            name: 'slug',
+        },
+        {
             data: 'active',
             render: function (data, type, row) {
 
                 if ({data:'active'} == true) {
-                    return 'Accepted';
+                    return 'Published';
                 }
                 else {
-                    return 'Waiting';
+                    return 'Unpublish';
 
                 }
             }
