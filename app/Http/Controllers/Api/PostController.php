@@ -21,6 +21,12 @@ class PostController extends BaseApiController
 
         return $this->sendResponse($posts->toArray(), 'posts retrieved successfully.');
     }
+    public function topViews($id)
+    {
+        $posts = Post::where('active',1)->orderBy('page_views', 'DESC')->get();
+
+        return $this->sendResponse($posts->toArray(), 'posts retrieved successfully.');
+    }
     public function byAuthor($id)
     {
         $posts = Post::where('active',1)->where('author_id',$id)->latest()->get();
@@ -41,9 +47,9 @@ class PostController extends BaseApiController
     }
     public function show($slug)
     {
-        $posts = Post::where('slug',$slug)->firstOrFail();
+        $posts = Post::where('slug',$slug)->first();
         if (is_null($posts)) {
-            return $this->sendError('Kategori not found.');
+            return $this->sendError('posts not found.');
         }
         $posts->increment('page_views', 1);
 
