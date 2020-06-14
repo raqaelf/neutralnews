@@ -21,6 +21,12 @@ class PostController extends BaseApiController
 
         return $this->sendResponse($posts->toArray(), 'posts retrieved successfully.');
     }
+    public function topViews($id)
+    {
+        $posts = Post::where('active',1)->orderBy('page_views', 'DESC')->get();
+
+        return $this->sendResponse($posts->toArray(), 'posts retrieved successfully.');
+    }
     public function byAuthor($id)
     {
         $posts = Post::where('active',1)->where('author_id',$id)->latest()->get();

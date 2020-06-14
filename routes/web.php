@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/api/post', 'Api\PostController@index')->name('api.post.index');
+Route::get('/api/post/topviews', 'Api\PostController@topViews')->name('api.post.topviews');
 Route::get('/api/post/{slug}', 'Api\PostController@show')->name('api.post.show');
 Route::get('/api/post/category', 'Api\PostController@category')->name('api.post.category');
 Route::get('/api/post/category/{id}', 'Api\PostController@byCategory')->name('api.post.category');
