@@ -16,6 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/api/post', 'Api\PostController@index')->name('api.post.index');
+Route::get('/api/post/{slug}', 'Api\PostController@show')->name('api.post.show');
+Route::get('/api/post/category', 'Api\PostController@category')->name('api.post.category');
+Route::get('/api/post/category/{id}', 'Api\PostController@byCategory')->name('api.post.category');
+Route::get('/api/post/author/{id}', 'Api\PostController@byAuthor')->name('api.post.author');
+Route::get('/api/post/search/{title}', 'Api\PostController@searchPost')->name('api.post.search');
 
 Auth::routes(['verify' => true]);
 
