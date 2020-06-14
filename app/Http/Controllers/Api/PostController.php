@@ -47,9 +47,9 @@ class PostController extends BaseApiController
     }
     public function show($slug)
     {
-        $posts = Post::where('slug',$slug)->firstOrFail();
+        $posts = Post::where('slug',$slug)->first();
         if (is_null($posts)) {
-            return $this->sendError('Kategori not found.');
+            return $this->sendError('posts not found.');
         }
         $posts->increment('page_views', 1);
 
