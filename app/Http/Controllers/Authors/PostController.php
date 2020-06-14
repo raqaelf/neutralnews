@@ -30,7 +30,7 @@ class PostController extends Controller
     {
         if (auth()->user()->role == "admin"){
             if ($request->ajax()) {
-                $data = Post::with('Category')->latest()->get();
+                $data = Post::with('Category','Author')->latest()->get();
                 return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
@@ -44,7 +44,7 @@ class PostController extends Controller
             }
         } else {
             if ($request->ajax()) {
-                $data = Post::with('Category')->where('author_id',auth()->user()->id)->latest()->get();
+                $data = Post::with('Category','Author')->where('author_id',auth()->user()->id)->latest()->get();
                 return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
@@ -77,16 +77,31 @@ class PostController extends Controller
                 return response()->json(['message' => 'Image must be not empty!'], 500);
             }
         }
-        $insert = Post::updateOrCreate(['id' => $request->input('id')],
-        [
-            'author_id'     => auth()->user()->id,
-            'title'			=> $request->input('title'),
-            'body'	        => $request->input('content'),
-            'image'			=> $filename,
-            'category_id'   => $request->input('category_id'),
-            'slug'          => Str::slug($request->input('title'))
-            ]
-        );
+        if (auth()->user()->role == 'admin'){
+            $insert = Post::updateOrCreate(['id' => $request->input('id')],
+            [
+                'title'			=> $request->input('title'),
+                'body'	        => $request->input('content'),
+                'image'			=> $filename,
+                'active'		=> $request->input('active'),
+                'category_id'   => $request->input('category_id'),
+                'slug'          => Str::slug($request->input('title'))
+                ]
+            );
+        } else {
+            $insert = Post::updateOrCreate(['id' => $request->input('id')],
+            [
+                'author_id'     => auth()->user()->id,
+                'title'			=> $request->input('title'),
+                'body'	        => $request->input('content'),
+                'image'			=> $filename,
+                'active'		=> $request->input('active'),
+                'category_id'   => $request->input('category_id'),
+                'slug'          => Str::slug($request->input('title'))
+                ]
+            );
+        }
+
         if ($insert) {
             return response()->json(['message' => 'Data created'], 201);
         } else {

@@ -30,6 +30,7 @@
                     <th>No</th>
                     <th>Title</th>
                     <th>Category</th>
+                    <th>Author</th>
                     <th>Slug</th>
                     <th>Status</th>
                     <th width="100px">Action</th>

@@ -20,6 +20,7 @@ switch (content) {
         {data: 'id', name: 'id'},
         {data: 'title', name: 'title'},
         {data: 'category.name', name: 'category'},
+        {data: 'author.name', name: 'author'},
         {
             data: 'slug',
             name: 'slug',
@@ -28,11 +29,11 @@ switch (content) {
             data: 'active',
             render: function (data, type, row) {
 
-                if ({data:'active'} == true) {
+                if (data == 1) {
                     return 'Published';
                 }
                 else {
-                    return 'Unpublish';
+                    return 'Unpublished';
 
                 }
             }
