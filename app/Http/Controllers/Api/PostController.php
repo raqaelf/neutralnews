@@ -21,9 +21,9 @@ class PostController extends BaseApiController
 
         return $this->sendResponse($posts->toArray(), 'posts retrieved successfully.');
     }
-    public function topViews($id)
+    public function topViews()
     {
-        $posts = Post::where('active',1)->orderBy('page_views', 'DESC')->get();
+        $posts = Post::where('active',1)->orderBy('page_views', 'DESC')->take(5)->get();
 
         return $this->sendResponse($posts->toArray(), 'posts retrieved successfully.');
     }
@@ -41,9 +41,9 @@ class PostController extends BaseApiController
     }
     public function category()
     {
-        $posts = Category::all()->latest()->get();
-
-        return $this->sendResponse($posts->toArray(), 'posts retrieved successfully.');
+        $categories = Category::all();
+        return $categories;
+        // return $this->sendResponse($categories->toArray(), 'posts retrieved successfully.');
     }
     public function show($slug)
     {
