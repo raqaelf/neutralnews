@@ -124,5 +124,12 @@ class PostController extends Controller
             return response()->json(['msg'=>'Failed']);
         }
     }
+
+    public function show($slug)
+    {
+        $data = Post::with('Category','Author')->where('slug',$slug)->first();
+
+        return view('post')->with(['data' => $data]);
+    }
 }
 
