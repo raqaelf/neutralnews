@@ -52,7 +52,7 @@
 		<div class="col-lg-4 mb-5">
 
 		<div class="card" style="max-height: 100%;">
-				<div class="card-header text-center"><b>Top Three</b></div>
+				<div class="card-header text-center bg-primary text-dark"><b>Top Three</b></div>
 
 				<div class="card-body row">
 					<!-- @if (session('status'))
@@ -69,12 +69,10 @@
 
 						<li class="pt-2 pb-2">
 							<a href="">This is some text within a card block.</a>
-							<span class="badge badge-danger">Baru</span>
 						</li>
 
 						<li class="pt-2 pb-2">
 							<a href="">This is some text within a card block.</a>
-							<span class="badge badge-danger">Baru</span>
 						</li>
 
 					</ol>
@@ -91,7 +89,7 @@
 		<div class="col-12 mb-5">
 
 		<div class="card" style="max-height: 100%;">
-				<div class="card-header text-center "><b>Internasional</b></div>
+				<div class="card-header text-center bg-primary text-dark"><b>Internasional</b></div>
 
 				<div class="card-body row justify-content-center">
 
