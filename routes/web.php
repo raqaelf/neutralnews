@@ -44,3 +44,6 @@ Route::post('/panel/category', 'Authors\CategoryController@store')->name('catego
 Route::get('/panel/category/{id}/edit', 'Authors\CategoryController@edit')->name('category.edit');
 Route::delete('/panel/category/{id}', 'Authors\CategoryController@destroy')->name('category.delete');
 
+Route::get('/post/{id}', function () {
+    return view('post');
+});
