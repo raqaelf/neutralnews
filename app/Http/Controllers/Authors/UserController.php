@@ -26,7 +26,7 @@ class UserController extends Controller
 			return Datatables::of($data)
 			->addIndexColumn()
 			->addColumn('action', function($row){
-				$btn = '<a href="javascript:void(0)" data-id="'.$row->id.'" class="btn btn-xs btn-white btn-uppercase editRole"><i class="icon ion-md-create mr-1"></i>Edit</a>';
+				$btn = '<a href="javascript:void(0)" data-id="'.$row->id.'" class="btn btn-xs btn-white btn-uppercase editRole"><i class="icon ion-md-eye mr-1"></i>View</a>';
 				$btn = $btn.' <a href="javascript:void(0)"  data-id="'.$row->id.'" class="btn btn-xs text-danger btn-uppercase deleteRole">Delete</a>';
 
 				return $btn;
@@ -52,11 +52,12 @@ class UserController extends Controller
             'role'    =>  $request->input('role'),
             ]
         );
-        if ($insert) {
-            return response()->json(['message' => 'Data created'], 201);
-        } else {
-            return response()->json(['message' => 'Failed to Create Data'], 500);
-        }
+        // if ($insert) {
+        //     return response()->json(['message' => 'Data created'], 201);
+        // } else {
+        //     return response()->json(['message' => 'Failed to Create Data'], 500);
+        // }
+        return $insert;
 	}
 
 	public function edit($id)
