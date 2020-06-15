@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/api/post', 'Api\PostController@index')->name('api.post.index');
 Route::get('/api/post/topviews', 'Api\PostController@topViews')->name('api.post.topviews');

@@ -13,6 +13,10 @@ class HomeController extends Controller
         $topview = Post::where('active',1)->orderBy('page_views', 'DESC')->take(4)->get();
         $data = Post::where('active',1)->with('Category','Author')->latest()->get();
 
-        return view('home')->with(['data' => $data, 'topview' => $topview]);;
+        // return view('home')->with(['data' => $data, 'topview' => $topview]);
+        foreach ($data as $data){
+            echo $data->category()->name;
+        }
+        // return $data->category->name;
     }
 }
