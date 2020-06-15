@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'HomeController@index')->name('home');
+
 Route::get('/api/post', 'Api\PostController@index')->name('api.post.index');
 Route::get('/api/post/topviews', 'Api\PostController@topViews')->name('api.post.topviews');
 Route::get('/api/post/{slug}', 'Api\PostController@show')->name('api.post.show');
@@ -44,6 +43,4 @@ Route::post('/panel/category', 'Authors\CategoryController@store')->name('catego
 Route::get('/panel/category/{id}/edit', 'Authors\CategoryController@edit')->name('category.edit');
 Route::delete('/panel/category/{id}', 'Authors\CategoryController@destroy')->name('category.delete');
 
-Route::get('/post/{id}', function () {
-    return view('post');
-});
+Route::get('/{slug}', 'Authors\PostController@show')->name('post.show');

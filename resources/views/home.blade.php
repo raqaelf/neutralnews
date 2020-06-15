@@ -62,19 +62,12 @@
 					@endif -->
 
 					<ol>
-						<li class="pt-2 pb-2">
-							<a href="">This is some text within a card block.</a>
-							<span class="badge badge-danger">Baru</span>
-						</li>
-
-						<li class="pt-2 pb-2">
-							<a href="">This is some text within a card block.</a>
-						</li>
-
-						<li class="pt-2 pb-2">
-							<a href="">This is some text within a card block.</a>
-						</li>
-
+						@foreach ($topview as $topview)
+							<li class="pt-2 pb-2">
+								<a href="/{{ $topview->slug }}">{{ $topview->title }}</a>
+								<span class="badge badge-danger">Baru</span>
+							</li>
+						@endforeach
 					</ol>
 
 				</div>
@@ -89,51 +82,62 @@
 		<div class="col-12 mb-5">
 
 		<div class="card" style="max-height: 100%;">
-				<div class="card-header text-center bg-primary text-dark"><b>Internasional</b></div>
+			<div class="card-header text-center bg-primary text-dark"><b>Umum</b></div>
 
-				<div class="card-body row justify-content-center">
+			<div class="card-body row justify-content-center">
 
-				<div class="col-lg-4 mb-5">
-					<div class="card" style="">
-						<img class="card-img-top" src="https://designrevision.com/docs/shards/images/3.jpg" alt="Card image cap">
-						<div class="card-body">
-							<h4 class="card-title">Sample Card Title</h4>
-							<p class="card-text">He seems sinking under the evidence could not only grieve and a visit. The father is to bless and placed in his length hid...</p>
-							<a href="#" class="btn btn-primary">Baca selengkapnya &rarr;</a>
+				@foreach ($data as $data)
+					@if($data->category->name == 'Umum')
+						<div class="col-lg-4 mb-5">
+							<div class="card" style="">
+								<img class="card-img-top" src="/uploads/articles/{{ $data->image }}" alt="Card image cap">
+								<div class="card-body">
+									<h4 class="card-title">{{ $data->title }}</h4>
+									<p class="card-text">{!! \Illuminate\Support\Str::words($data->body, 20, '....') !!}</p>
+									<a href="/{{ $data->slug }}" class="btn btn-primary">Baca selengkapnya &rarr;</a>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
+					@endif
+				@endforeach
 
-				<div class="col-lg-4 mb-5">
-					<div class="card" style="">
-						<img class="card-img-top" src="https://designrevision.com/docs/shards/images/3.jpg" alt="Card image cap">
-						<div class="card-body">
-							<h4 class="card-title">Sample Card Title</h4>
-							<p class="card-text">He seems sinking under the evidence could not only grieve and a visit. The father is to bless and placed in his length hid...</p>
-							<a href="#" class="btn btn-primary">Baca selengkapnya &rarr;</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-4 mb-5">
-					<div class="card" style="">
-						<img class="card-img-top" src="https://designrevision.com/docs/shards/images/3.jpg" alt="Card image cap">
-						<div class="card-body">
-							<h4 class="card-title">Sample Card Title</h4>
-							<p class="card-text">He seems sinking under the evidence could not only grieve and a visit. The father is to bless and placed in his length hid...</p>
-							<a href="#" class="btn btn-primary">Baca selengkapnya &rarr;</a>
-						</div>
-					</div>
-				</div>
-
-				</div>
 			</div>
-
-		</div>
-
-
 		</div>
 	</div>
+</div>
+
+
+<div class="row justify-content-center">
+		<div class="col-12 mb-5">
+
+		<div class="card" style="max-height: 100%;">
+			<div class="card-header text-center bg-primary text-dark"><b>Internasional</b></div>
+
+			<div class="card-body row justify-content-center">
+
+					@if($data->category->name == 'Internasional')
+						<div class="col-lg-4 mb-5">
+							<div class="card" style="">
+								<img class="card-img-top" src="/uploads/articles/{{ $data->image }}" alt="Card image cap">
+								<div class="card-body">
+									<h4 class="card-title">{{ $data->title }}</h4>
+									<p class="card-text">{!! \Illuminate\Support\Str::words($data->body, 20, '....') !!}</p>
+									<a href="/{{ $data->slug }}" class="btn btn-primary">Baca selengkapnya &rarr;</a>
+								</div>
+							</div>
+						</div>
+					@endif
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+</div>
+
+
+	
 
 
 </div>
